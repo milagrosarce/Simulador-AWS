@@ -72,10 +72,3 @@ http://localhost:8000
 
 La simulacion permite observar como el grupo escala ante picos de trafico, como responde a una falla de instancia y cuando ejecuta scale-in al bajar la demanda.
 
-## Escenarios analizados
-
-- Escenario 1: inicializacion del sistema entre 0 y 60 segundos.
-- Escenario 2: aumento repentino de trafico entre 70 y 130 segundos.
-- Escenario 3: solicitud de scale-out y warm-up entre 110 y 150 segundos.
-- Escenario 4: disminucion de carga entre 230 y 280 segundos.
-- Escenario 5: ejecucion de scale-in entre 230 y 300 segundos.
