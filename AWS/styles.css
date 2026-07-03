@@ -1,0 +1,291 @@
+:root {
+  --bg: #f4f6f8;
+  --panel: #ffffff;
+  --ink: #17212b;
+  --muted: #697783;
+  --line: #d9e0e7;
+  --blue: #2563eb;
+  --orange: #f59e0b;
+  --green: #16a34a;
+  --red: #dc2626;
+  --dark: #26313d;
+  --shadow: 0 10px 24px rgba(23, 33, 43, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.app-shell {
+  width: min(1440px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--orange);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: clamp(1.6rem, 2.5vw, 2.35rem);
+}
+
+h2 {
+  font-size: 1rem;
+}
+
+.run-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.primary-button,
+.ghost-button,
+.icon-button,
+.button-stack button {
+  min-height: 40px;
+  padding: 0 14px;
+  font-weight: 750;
+}
+
+.primary-button {
+  background: var(--blue);
+  color: white;
+}
+
+.ghost-button,
+.icon-button {
+  background: var(--panel);
+  color: var(--dark);
+  border: 1px solid var(--line);
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.metric,
+.chart-block,
+.control-group {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.metric {
+  min-height: 78px;
+  padding: 13px 14px;
+}
+
+.metric span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.metric strong {
+  font-size: 1.45rem;
+}
+
+.metric-wide {
+  grid-column: span 2;
+}
+
+.metric-wide strong {
+  display: block;
+  overflow: hidden;
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 14px;
+  align-items: start;
+}
+
+.charts-panel {
+  display: grid;
+  gap: 14px;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.chart-block {
+  min-width: 0;
+  padding: 14px;
+}
+
+.chart-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.chart-heading span {
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 650;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  background: #fbfcfe;
+}
+
+.control-panel {
+  display: grid;
+  gap: 14px;
+}
+
+.control-group {
+  padding: 14px;
+}
+
+.control-group h2 {
+  margin-bottom: 14px;
+}
+
+.range-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 14px 0 8px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.range-row strong {
+  color: var(--ink);
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--blue);
+}
+
+.button-stack {
+  display: grid;
+  gap: 8px;
+}
+
+.button-stack button {
+  background: #eef2f7;
+  color: var(--dark);
+  text-align: left;
+}
+
+.button-stack button:hover,
+.ghost-button:hover,
+.icon-button:hover {
+  background: #e4eaf2;
+}
+
+.event-log {
+  height: 180px;
+  margin: 0;
+  padding-left: 20px;
+  overflow: auto;
+  color: var(--dark);
+  font-size: 0.9rem;
+}
+
+.event-log li {
+  margin-bottom: 7px;
+}
+
+@media (max-width: 980px) {
+  .workspace,
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .status-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    width: min(100% - 20px, 1440px);
+    padding: 16px 0;
+  }
+
+  .topbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .run-controls {
+    display: grid;
+    grid-template-columns: 1fr 70px 1fr;
+  }
+
+  .status-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .metric-wide {
+    grid-column: span 2;
+  }
+
+  .chart-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulador Auto Scaling AWS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">AWS Auto Scaling</p>
+        <h1>Simulador de control proporcional</h1>
+      </div>
+      <div class="run-controls">
+        <button id="toggleRun" class="primary-button" type="button">Pausar</button>
+        <button id="stepOnce" class="icon-button" type="button" title="Avanzar un paso">+1s</button>
+        <button id="resetSimulation" class="ghost-button" type="button">Reiniciar</button>
+      </div>
+    </header>
+
+    <section class="status-grid" aria-label="Estados de la simulacion">
+      <article class="metric">
+        <span>Tiempo</span>
+        <strong id="timeValue">0 s</strong>
+      </article>
+      <article class="metric">
+        <span>RPS</span>
+        <strong id="rpsValue">0</strong>
+      </article>
+      <article class="metric">
+        <span>CPU</span>
+        <strong id="cpuValue">0%</strong>
+      </article>
+      <article class="metric">
+        <span>Error</span>
+        <strong id="errorValue">0</strong>
+      </article>
+      <article class="metric">
+        <span>Control P</span>
+        <strong id="controlValue">0</strong>
+      </article>
+      <article class="metric">
+        <span>EC2 activas</span>
+        <strong id="ec2Value">4</strong>
+      </article>
+      <article class="metric">
+        <span>EC2 pendientes</span>
+        <strong id="pendingValue">0</strong>
+      </article>
+      <article class="metric metric-wide">
+        <span>Último evento</span>
+        <strong id="lastEventValue">Inicio</strong>
+      </article>
+    </section>
+
+    <section class="workspace">
+      <section class="charts-panel">
+        <div class="chart-block">
+          <div class="chart-heading">
+            <h2>CPU promedio</h2>
+            <span>Setpoint 60% | rango 50%-70%</span>
+          </div>
+          <canvas id="cpuChart" width="960" height="260"></canvas>
+        </div>
+
+        <div class="chart-grid">
+          <div class="chart-block">
+            <div class="chart-heading">
+              <h2>Requests</h2>
+              <span>Carga de entrada</span>
+            </div>
+            <canvas id="rpsChart" width="460" height="220"></canvas>
+          </div>
+
+          <div class="chart-block">
+            <div class="chart-heading">
+              <h2>Instancias EC2</h2>
+              <span>Verde activas | azul pendientes</span>
+            </div>
+            <canvas id="ec2Chart" width="460" height="220"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <aside class="control-panel">
+        <section class="control-group">
+          <h2>Controlador</h2>
+          <label class="range-row" for="kpInput">
+            <span>Kp</span>
+            <strong id="kpLabel">0.40</strong>
+          </label>
+          <input id="kpInput" type="range" min="0" max="1.2" step="0.05" value="0.40">
+
+          <label class="range-row" for="requestInput">
+            <span>Requests base</span>
+            <strong id="requestLabel">4800</strong>
+          </label>
+          <input id="requestInput" type="range" min="1200" max="12000" step="100" value="4800">
+
+          <label class="range-row" for="speedInput">
+            <span>Velocidad</span>
+            <strong id="speedLabel">5x</strong>
+          </label>
+          <input id="speedInput" type="range" min="1" max="20" step="1" value="5">
+        </section>
+
+        <section class="control-group">
+          <h2>Perturbaciones</h2>
+          <div class="button-stack">
+            <button id="blackFriday" type="button">Black Friday</button>
+            <button id="trafficSpike" type="button">Pico de requests</button>
+            <button id="lowDemand" type="button">Baja demanda</button>
+            <button id="instanceFailure" type="button">Falla EC2</button>
+          </div>
+        </section>
+
+        <section class="control-group">
+          <h2>Eventos</h2>
+          <ol id="eventLog" class="event-log"></ol>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
